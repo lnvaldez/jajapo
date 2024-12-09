@@ -4,12 +4,16 @@ const register = async (req, res) => {
   const { name, email, password, confirmPassword } = req.body;
   let errors = [];
 
-  if (password !== confirmPassword) {
-    errors.push({ msg: "Passwords do not match" });
+  if (!name || !email || !password || !confirmPassword) {
+    errors.push({ msg: "Please fill out all fields" });
   }
 
-  if (password.length < 6) {
+  if (password.length < 8) {
     errors.push({ msg: "Password must be at least 8 characters" });
+  }
+
+  if (password !== confirmPassword) {
+    errors.push({ msg: "Passwords do not match" });
   }
 
   if (errors.length > 0) {
@@ -38,17 +42,15 @@ const login = async (req, res) => {
 
   try {
     const user = await User.login(email, password);
-
     req.session.user = {
       id: user._id,
       name: user.name,
       email: user.email,
       role: user.role,
     };
-
     res.redirect("/");
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(401).json({ error: "Invalid email or password" });
   }
 };
 
