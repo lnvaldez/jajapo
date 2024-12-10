@@ -26,10 +26,10 @@ const register = async (req, res) => {
 
   try {
     await User.register(name, email, password);
-    res.redirect("pages/login");
+    res.redirect("/login");
   } catch (error) {
     errors.push({ msg: error.message });
-    res.render("pages/register", {
+    res.render("/register", {
       errors,
       name,
       email,
