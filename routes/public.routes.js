@@ -18,7 +18,7 @@ router.get("/services", (req, res) => {
 });
 
 router.get("/login", (req, res) => {
-  res.render("pages/login");
+  res.render("pages/login", { layout: false });
 });
 
 router.post("/login", (req, res) => {
@@ -26,7 +26,7 @@ router.post("/login", (req, res) => {
 });
 
 router.get("/register", (req, res) => {
-  res.render("pages/register");
+  res.render("pages/register", { layout: false });
 });
 
 router.post("/register", (req, res) => {
