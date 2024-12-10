@@ -1,8 +1,9 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="css/tailwind-output.css" />
 <section class="bg-white">
-  <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
+  <div class="grid grid-cols-1 lg:grid-cols-12 lg:min-h-screen">
     <aside
-      class="relative block h-16 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6 bg-orange-700"
+      class="relative block h-48 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6 bg-orange-700"
     >
       <img
         alt=""
@@ -12,7 +13,7 @@
     </aside>
 
     <main
-      class="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6"
+      class="flex items-center justify-center px-4 py-8 sm:px-8 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6"
     >
       <div class="max-w-xl lg:max-w-3xl">
         <h1
@@ -35,7 +36,7 @@
               type="email"
               id="Email"
               name="email"
-              class="mt-1 w-full rounded-md border-gray-200 bg-white text-lg text-gray-700 p-4 shadow-sm"
+              class="mt-1 w-full rounded-md border-gray-200 bg-white p-3 text-sm text-gray-700 shadow-sm md:p-4 md:text-lg"
             />
           </div>
 
@@ -51,13 +52,13 @@
               type="password"
               id="Password"
               name="password"
-              class="mt-1 w-full rounded-md border-gray-200 bg-white text-lg text-gray-700 p-4 shadow-sm"
+              class="mt-1 w-full rounded-md border-gray-200 bg-white p-3 text-sm text-gray-700 shadow-sm md:p-4 md:text-lg"
             />
           </div>
 
           <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
             <button
-              class="inline-block shrink-0 rounded-md border border-orange-500 bg-orange-500 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-orange-500 focus:outline-none focus:ring active:text-orange-400"
+              class="inline-block shrink-0 rounded-md border border-orange-500 bg-orange-500 px-8 py-2 text-xs font-medium text-white transition hover:bg-transparent hover:text-orange-500 focus:outline-none focus:ring active:text-orange-400 sm:px-12 sm:py-3 sm:text-sm"
             >
               Iniciar Sesión
             </button>
@@ -65,7 +66,7 @@
             <p class="mt-4 text-sm text-gray-500 sm:mt-0">
               ¿No tienes una cuenta?
               <a href="/register" class="text-orange-500 underline"
-                >Registrate</a
+                >Regístrate</a
               >.
             </p>
           </div>
