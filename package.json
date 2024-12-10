@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx tailwindcss -i public/css/tailwind-input.css -o public/css/tailwind-output.css --watch",
+    "build:css": "npx tailwindcss -i public/css/tailwind-input.css -o public/css/tailwind-output.css --watch",
     "dev": "nodemon app.js"
   },
   "keywords": [],
