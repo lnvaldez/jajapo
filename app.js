@@ -36,6 +36,8 @@ app.use((req, res, next) => {
 app.set("view engine", "ejs");
 app.set("layout", "layout");
 
+app.locals.year = new Date().getFullYear();
+
 routes(app);
 
 const startServer = async () => {
