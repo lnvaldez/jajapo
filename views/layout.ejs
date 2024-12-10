@@ -6,9 +6,9 @@
     <title>Jajapo</title>
     <link rel="stylesheet" href="css/tailwind-output.css" />
   </head>
-  <body>
+  <body class="flex flex-col min-h-full">
     <%- include("./partials/navbar") %>
-    <main><%- body %></main>
+    <main class="flex-grow"><%- body %></main>
     <%- include("./partials/footer") %>
   </body>
 </html>
