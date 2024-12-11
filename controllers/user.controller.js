@@ -54,13 +54,4 @@ const login = async (req, res) => {
   }
 };
 
-const logout = async (req, res) => {
-  req.session.destroy((err) => {
-    if (err) {
-      console.error("Error destroying session");
-    }
-    res.redirect("/");
-  });
-};
-
-module.exports = { register, login, logout };
+module.exports = { register, login };
