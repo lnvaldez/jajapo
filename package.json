@@ -6,8 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:css": "npx tailwindcss -i public/css/tailwind-input.css -o public/css/tailwind-output.css --watch",
-    "dev": "nodemon app.js",
-    "vercel-build": "npm run build"
+    "dev": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
