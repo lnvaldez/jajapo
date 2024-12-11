@@ -21,5 +21,10 @@
       "dest": "app.js"
     }
   ],
-  "regions": ["gru1"]
+  "regions": ["gru1"],
+  "functions": {
+    "app.js": {
+      "includeFiles": "views/**"
+    }
+  }
 }
