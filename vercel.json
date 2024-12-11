@@ -4,11 +4,10 @@
   "builds": [
     {
       "src": "app.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "public/**",
-      "use": "@vercel/static"
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["views/**", "public/**"]
+      }
     }
   ],
   "routes": [
@@ -21,10 +20,5 @@
       "dest": "app.js"
     }
   ],
-  "regions": ["gru1"],
-  "functions": {
-    "app.js": {
-      "includeFiles": "views/**"
-    }
-  }
+  "regions": ["gru1"]
 }
