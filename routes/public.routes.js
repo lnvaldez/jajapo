@@ -32,6 +32,15 @@ router.get("/services", async (req, res) => {
   }
 });
 
+router.get("/services/:category/:id", async (req, res) => {
+  try {
+    const service = await Service.findById(req.params.id);
+    res.render("pages/service-detail", { service });
+  } catch (error) {
+    return res.redirect("/error/404");
+  }
+});
+
 router.get("/login", (req, res) => {
   res.render("pages/login", { layout: false });
 });
