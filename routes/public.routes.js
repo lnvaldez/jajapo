@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { Service } = require("../models");
 const userController = require("../controllers/user.controller");
 
 router.get("/", (req, res) => {
@@ -14,8 +15,21 @@ router.get("/contact", (req, res) => {
   res.render("pages/contact");
 });
 
-router.get("/services", (req, res) => {
-  res.render("pages/services");
+router.get("/services", async (req, res) => {
+  try {
+    const approvedServices = await Service.find({ isApproved: true });
+
+    if (approvedServices.length > 0) {
+      res.render("pages/services", { approvedServices });
+    } else {
+      res.render("pages/services", {
+        approvedServices: [],
+        message: "No approved services available",
+      });
+    }
+  } catch (error) {
+    return res.redirect("/error/404");
+  }
 });
 
 router.get("/login", (req, res) => {
