@@ -8,6 +8,7 @@ const publishService = async (req, res) => {
     }
 
     const serviceData = {
+      userId: req.body.userId,
       title: req.body.title,
       category: req.body.category,
       description: req.body.description,
