@@ -42,16 +42,5 @@ app.locals.year = new Date().getFullYear();
 connectDB().catch(console.error);
 
 routes(app);
-const startServer = async () => {
-  try {
-    await connectDB();
-    app.listen(PORT, () => {
-      console.log(`⭐ Express server running on port ${PORT}`);
-    });
-  } catch (error) {
-    console.error("❌ Failed to start server:", error);
-    process.exit(1);
-  }
-};
 
-startServer();
+module.exports = app;
