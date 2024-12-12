@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const serviceController = require("../controllers/service.controller");
+const upload = require("../middleware/upload.middleware");
 
 router.get("/", (req, res) => {
   if (req.session.user) {
@@ -8,5 +10,11 @@ router.get("/", (req, res) => {
     res.redirect("/login");
   }
 });
+
+router.post(
+  "/",
+  upload.single("bannerImage"),
+  serviceController.publishService
+);
 
 module.exports = router;

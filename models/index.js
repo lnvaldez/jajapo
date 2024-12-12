@@ -1,3 +1,4 @@
 const User = require("./user.model");
+const Service = require("./service.model");
 
-module.exports = { User };
+module.exports = { User, Service };

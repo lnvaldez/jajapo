@@ -1,54 +1,72 @@
-<div class="max-w-4xl mx-auto space-y-6 pb-8">
-  <div class="p-4">
-    <label
-      for="dropzone-file"
-      class="flex flex-col items-center w-full max-w-lg p-6 mx-auto mt-2 text-center border-2 border-dashed rounded-xl cursor-pointer border-gray-300 bg-white hover:bg-gray-50 transition-all duration-200"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="1.5"
-        stroke="currentColor"
-        class="w-10 h-10 mb-2 text-gray-500"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
-        />
-      </svg>
-
-      <h2 class="text-lg font-medium tracking-wide text-gray-900">
-        Banner de servicio
-      </h2>
-
-      <p class="mt-2 text-sm tracking-wide text-gray-500">
-        Sube o arrastra tu archivo de banner
-      </p>
-
-      <p class="mt-1 text-xs tracking-wide text-gray-400">
-        SVG, PNG, JPG o GIF
-      </p>
-
-      <input
-        id="dropzone-file"
-        type="file"
-        class="hidden"
-        accept=".svg,.png,.jpg,.jpeg,.gif"
-      />
-    </label>
-  </div>
-
+<div class="max-w-4xl mx-auto space-y-6 pb-8 mt-8">
   <section class="p-6 bg-white rounded-md shadow-md mb-6 space-y-4">
-    <h2 class="text-lg font-semibold text-gray-700">Detalles del Servicio</h2>
+    <form id="serviceForm" class="mt-4" enctype="multipart/form-data">
+      <div class="p-4">
+        <label
+          for="bannerImage"
+          class="flex flex-col items-center w-full max-w-lg p-6 mx-auto mt-2 text-center border-2 border-dashed rounded-xl cursor-pointer border-gray-300 bg-white hover:bg-gray-50 transition-all duration-200"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-10 h-10 mb-2 text-gray-500"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
+            />
+          </svg>
 
-    <form class="mt-4">
+          <h2 class="text-lg font-medium tracking-wide text-gray-900">
+            Banner de servicio
+          </h2>
+
+          <p class="mt-2 text-sm tracking-wide text-gray-500">
+            Sube o arrastra tu archivo de banner
+          </p>
+
+          <p class="mt-1 text-xs tracking-wide text-gray-400">
+            PNG, JPG o JPEG (max. 5MB)
+          </p>
+
+          <input
+            id="bannerImage"
+            name="bannerImage"
+            type="file"
+            class="hidden"
+            accept=".png,.jpg,.jpeg"
+          />
+        </label>
+        <div id="preview" class="mt-4"></div>
+      </div>
+
       <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <h2 class="text-lg font-semibold text-gray-700">
+          Detalles del Servicio
+        </h2>
+        <div class="col-span-2">
+          <label class="text-gray-700" for="category"> Categoría </label>
+          <select
+            id="category"
+            name="category"
+            placeholder="Seleccione una categoría"
+            class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
+          >
+            <option value="" disabled selected>Seleccione una categoría</option>
+            <option value="electricist">Electricista</option>
+            <option value="designer">Diseñador</option>
+            <option value="gardener">Jardinero</option>
+          </select>
+        </div>
         <div class="col-span-2">
           <label class="text-gray-700" for="title"> Título del Servicio </label>
           <input
             id="title"
+            name="title"
             type="text"
             class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
           />
@@ -58,15 +76,17 @@
           <label class="text-gray-700" for="description"> Descripción </label>
           <textarea
             id="description"
+            name="description"
             rows="4"
             class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
           ></textarea>
         </div>
 
         <div>
-          <label class="text-gray-700" for="price"> Precio </label>
+          <label class="text-gray-700" for="price"> Precio (p/hora) </label>
           <input
             id="price"
+            name="price"
             type="number"
             class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
           />
@@ -76,6 +96,7 @@
           <label class="text-gray-700" for="phone"> Teléfono </label>
           <input
             id="phone"
+            name="phone"
             type="tel"
             class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
           />
@@ -86,12 +107,13 @@
           <div class="relative">
             <input
               id="location"
+              name="location"
               type="text"
               class="block w-full px-4 py-2 mt-2 pl-10 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
               placeholder="Buscar ubicación..."
             />
             <svg
-              class="absolute left-3 top-5 h-5 w-5 text-gray-400"
+              class="absolute left-3 top-3 h-5 w-5 text-gray-400"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -116,7 +138,7 @@
       <div class="flex justify-end mt-6">
         <button
           type="submit"
-          class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+          class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-orange-500 rounded-md hover:bg-orange-600 focus:outline-none focus:bg-gray-600"
         >
           Publicar Servicio
         </button>
@@ -126,13 +148,45 @@
 </div>
 
 <script>
-  function handleFileChange(event) {
-    const file = event.target.files[0];
-    const preview = document.getElementById("preview");
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      preview.innerHTML = `<img src="${reader.result}" alt="Preview" class="object-cover w-full h-full rounded-lg">`;
-    };
-    reader.readAsDataURL(file);
-  }
+  document
+    .getElementById("bannerImage")
+    .addEventListener("change", function (event) {
+      const file = event.target.files[0];
+      if (file) {
+        const preview = document.getElementById("preview");
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          preview.innerHTML = `<img src="${reader.result}" alt="Preview" class="max-w-lg mx-auto h-40 object-cover rounded-lg">`;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+  document
+    .getElementById("serviceForm")
+    .addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(this);
+
+      try {
+        const response = await fetch("/publish", {
+          method: "POST",
+          body: formData,
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          alert("Servicio publicado exitosamente!");
+          this.reset();
+          document.getElementById("preview").innerHTML = "";
+        } else {
+          alert(result.error || "Error al publicar el servicio");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Error al publicar el servicio");
+      }
+    });
 </script>
