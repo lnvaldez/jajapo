@@ -35,6 +35,7 @@ router.get("/services", async (req, res) => {
 router.get("/services/:category/:id", async (req, res) => {
   try {
     const service = await Service.findById(req.params.id);
+    console.log(service.bannerImage);
     res.render("pages/service-detail", { service });
   } catch (error) {
     return res.redirect("/error/404");
