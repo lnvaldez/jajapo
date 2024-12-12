@@ -1,4 +1,5 @@
-<div class="max-w-4xl mx-auto space-y-6 pb-8 mt-8">
+<script src="//unpkg.com/alpinejs" defer></script>
+<div x-data="{ isOpen : false }" class="max-w-4xl mx-auto space-y-6 pb-8 mt-8">
   <section class="p-6 bg-white rounded-md shadow-md mb-6 space-y-4">
     <form id="serviceForm" class="mt-4" enctype="multipart/form-data">
       <input type="hidden" name="userId" value="<%= user.id %>" />
@@ -139,55 +140,118 @@
       <div class="flex justify-end mt-6">
         <button
           type="submit"
-          class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-orange-500 rounded-md hover:bg-orange-600 focus:outline-none focus:bg-gray-600"
+          class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-orange-500 rounded-md hover:bg-orange-600 focus:outline-none focus:bg-orange-600"
         >
           Publicar Servicio
         </button>
       </div>
     </form>
   </section>
-</div>
 
-<script>
-  document
-    .getElementById("bannerImage")
-    .addEventListener("change", function (event) {
-      const file = event.target.files[0];
-      if (file) {
-        const preview = document.getElementById("preview");
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          preview.innerHTML = `<img src="${reader.result}" alt="Preview" class="max-w-lg mx-auto h-40 object-cover rounded-lg">`;
-        };
-        reader.readAsDataURL(file);
-      }
-    });
+  <div id="modal" class="hidden fixed inset-0 z-10 overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen">
+      <div class="bg-white rounded-lg shadow-xl sm:max-w-sm p-6 text-center">
+        <h3 id="modal-title" class="text-lg font-medium">
+          Servicio publicado!
+        </h3>
+        <p class="text-gray-500 mt-2">
+          Tu servicio ha sido publicado exitosamente!
+        </p>
+        <div class="mt-4">
+          <label
+            for="serviceLink"
+            class="block text-sm font-medium text-gray-500"
+            >Comparte el link:</label
+          >
+          <div class="flex items-center mt-2">
+            <input
+              id="serviceLink"
+              type="text"
+              readonly
+              class="border border-gray-300 rounded-l px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-600"
+            />
+            <button
+              id="copyLinkButton"
+              class="hidden mx-1 text-gray-600 transition-colors duration-300 sm:block dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-500"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-6 h-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <button
+          id="closeModal"
+          class="bg-orange-500 text-white px-4 py-2 mt-5 rounded hover:bg-orange-600"
+        >
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
 
-  document
-    .getElementById("serviceForm")
-    .addEventListener("submit", async function (e) {
-      e.preventDefault();
-
-      const formData = new FormData(this);
-
-      try {
-        const response = await fetch("/publish", {
-          method: "POST",
-          body: formData,
-        });
-
-        const result = await response.json();
-
-        if (response.ok) {
-          alert("Servicio publicado exitosamente!");
-          this.reset();
-          document.getElementById("preview").innerHTML = "";
-        } else {
-          alert(result.error || "Error al publicar el servicio");
+  <script>
+    document
+      .getElementById("bannerImage")
+      .addEventListener("change", function (event) {
+        const file = event.target.files[0];
+        if (file) {
+          const preview = document.getElementById("preview");
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            preview.innerHTML = `<img src="${reader.result}" alt="Preview" class="max-w-lg mx-auto h-40 object-cover rounded-lg">`;
+          };
+          reader.readAsDataURL(file);
         }
-      } catch (error) {
-        console.error("Error:", error);
-        alert("Error al publicar el servicio");
-      }
-    });
-</script>
+      });
+
+    const form = document.getElementById("serviceForm");
+    const modal = document.getElementById("modal");
+    const closeModal = document.getElementById("closeModal");
+
+    function toggleModal(show) {
+      modal.classList.toggle("hidden", !show);
+    }
+
+    closeModal.addEventListener("click", () => toggleModal(false));
+
+    document
+      .getElementById("serviceForm")
+      .addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+
+        try {
+          const response = await fetch("/publish", {
+            method: "POST",
+            body: formData,
+          });
+
+          const result = await response.json();
+
+          if (response.ok) {
+            toggleModal(true);
+            this.reset();
+            document.getElementById("preview").innerHTML = "";
+          } else {
+            alert(result.error || "Error al publicar el servicio");
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          alert("Error al publicar el servicio");
+        }
+      });
+  </script>
+</div>
